@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Function Learning</title>
+</head>
+<script type="text/javascript" src="../../DebugUtils.js"></script>
+<body>
+<div id="display"></div>
+<script>
+
+    // 可以在后面声明函数
+    test();
+    function test() {
+        document.write("test");
+    }
+    // 函数名区分大小写
+    function TEST() {
+
+    }
+
+    // 函数名重复会产生覆盖
+    function test() {
+        document.write("test overwrite" + "\<br\>");
+    }
+
+    function windowFunc() {
+        document.write("I am a func from window obj" + "\<br\>");
+    }
+
+    // 函数会自动变为window对象的函数
+    window.windowFunc();
+
+    function ifNoParamPassed(x, y) {
+        // x,y默认值
+        x = x || 1;
+        y = y || 2;
+        return x + y;
+    }
+
+    // arguments
+    function args(x, y) {
+        x = arguments[0] ? arguments[0] : 0;
+        y = arguments[1] ? arguments[1] : 0;
+        return x + y;
+    }
+    function args(x, y) {
+        var paramsNum = arguments.length;
+        var sum = 0; // sum 需要初始化，否则结果会是NaN
+        for (var i = 0; i < paramsNum; i++) {
+            sum += arguments[i];
+        }
+        return sum;
+    }
+
+    p(args(1,2,3,4)); // 10
+
+
+</script>
+</body>
+</html>

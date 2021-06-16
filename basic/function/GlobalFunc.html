@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>global function</title>
+</head>
+<script type="text/javascript" src="../../DebugUtils.js"></script>
+<body>
+
+<script>
+    p('<img src="imgs/parseInt.png" alt="">');
+    sep();
+    p(parseInt('34')); // 34
+    p(parseInt('3king')); // 3
+    p(parseInt('notNum')); // NaN
+    p(parseInt(' 11 22  44 53')); // 11
+    p(parseInt('F')); // NaN
+    p(parseInt('F', 16)) // 15
+    p(parseInt('17', 8)) // 15
+    p(parseInt('0xfff')); // 4095
+
+    p('<img src="imgs/parseFloat.png" alt="">');
+    sep();
+    p(parseFloat('2.6')); // 2.6
+    p(parseFloat('323')); // 323
+    p(parseFloat('2e2')); // 200
+
+    p('<img src="imgs/isFiniteIsNaN.png" alt="">');
+    sep();
+    p(isFinite(Infinity)); // false
+    p(isFinite(-Infinity)); // false
+    p(isFinite(0/0)); // false
+    p(isFinite(3)); // true
+    p(isNaN(NaN)); // true
+    p(isNaN(false)); // false   (false 是数字)
+    p(isNaN(123)); // false
+    p(isNaN('asd')); // true
+    var x = parseInt('king3');
+    p('x: ' + x);
+    p(isNaN(x)); // true
+
+    p('<img src="imgs/Number.png" alt="">');
+    p('<img src="imgs/Number2.png" alt="">');
+    sep();
+
+    p('<img src="imgs/String.png" alt="">');
+    sep();
+
+    p(String(NaN)) // NaN
+    p(String(null)) // null
+    p(String(undefined)) // undefined
+
+</script>
+</body>
+</html>

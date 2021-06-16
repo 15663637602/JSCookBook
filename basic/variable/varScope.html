@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>变量作用域</title>
+</head>
+<script type="text/javascript" src="../../DebugUtils.js"></script>
+<body>
+<script>
+
+    enhance('尽量控制全局变量的数量');
+    enhance('函数体内声明变量一定要加var');
+
+    sep();
+
+    // 全局变量
+    var globalX = 1;
+    function test() {
+        p('函数体内x: ' + globalX); // 1
+        globalX = 19;
+        p('函数内x重新赋值后: ' + globalX); // 19
+    }
+    p('函数体外x: ' + globalX); // 1
+    test();
+    p('函数调用后x: ' + globalX); // 19
+
+    sep();
+
+    // 局部变量 需要用var关键字来定义
+    function localTest() {
+        var localX = 1;
+        p(localX); // 1
+    }
+    localTest();
+    // p(localX); 会报错
+    // 如果不用var定义，变量则为全局变量
+    function localTest2() {
+        localY = 5;
+        p('in function: ' + localY); // 5
+    }
+    localTest2();
+    p(localY); // 5
+
+    sep();
+
+    // 综合例子
+    var globalXx = 1, globalYy = 2;
+    function calc(globalXx, globalYy) {
+        p('a: ' + a); // undefined
+        p('in func, globalXx: ' + globalXx); // 1
+        p('in func, globalYy: ' + globalYy); // 2
+        globalXx = 5; // 这里不会改全局变量globalXx的值，因为globalXx在这个位置是入参，是局部变量
+        var globalXx = 0, globalYy = 8; // 这里相当于是局部变量，并且把入参局部变量覆盖了
+        globalXx = 3;
+        z = globalYy + globalXx;
+        var a = 198;
+        p('a: ' + a); // 198
+        p('in func 新声明了一个globalXx为: ' + globalXx); // 3
+        p('z: ' + z); // 11
+    }
+    calc(globalXx, globalYy);
+
+    p('outside func globalXx: ' + globalXx); // 1
+
+
+</script>
+</body>
+</html>

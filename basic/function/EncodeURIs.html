@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>encodeURI encodeURIComponent escape</title>
+</head>
+<body>
+<p>
+  <b>一、escape和它们不是同一类简单来说，</b><br>
+  <mark>escape是对字符串(string)进行编码(而另外两种是对URL)，</mark>作用是让它们在所有电脑上可读。
+  编码之后的效果是%XX或者%uXXXX这种形式。
+  其中 ASCII字母  数字  @*/+   这几个字符不会被编码，其余的都会。
+  最关键的是，当你需要对URL编码时，请忘记这个方法，<mark>这个方法是针对字符串使用的，不适用于URL。</mark>
+</p>
+<p>
+  <b>二、最常用的encodeURI和encodeURIComponent</b><br>
+  对URL编码是常见的事，所以这两个方法应该是实际中要特别注意的。<br>
+  它们都是编码URL，唯一区别就是编码的字符范围，其中<br>
+  encodeURI方法不会对下列字符编码  ASCII字母  数字  ~!@#$&*()=:/,;?+'<br>
+  encodeURIComponent方法不会对下列字符编码 ASCII字母  数字  ~!*()'<br>
+  所以encodeURIComponent比encodeURI编码的范围更大。<br>
+  实际例子来说，encodeURIComponent会把 http://  编码成  http%3A%2F%2F 而encodeURI却不会。<br>
+</p>
+<p>
+  <b>
+    三、最重要的，什么场合应该用什么方法<br><br>
+
+    1、如果只是编码字符串，不和URL有半毛钱关系，那么用escape。<br><br>
+
+    2、如果你需要编码整个URL，然后需要使用这个URL，那么用encodeURI。<br><br>
+
+    比如<br>
+    encodeURI("http://www.cnblogs.com/season-huang/some other thing");<br>
+    编码后会变为<br>"http://www.cnblogs.com/season-huang/some%20other%20thing";<br><br>
+    其中，空格被编码成了%20。但是如果你用了encodeURIComponent，那么结果变为<br>
+    "http%3A%2F%2Fwww.cnblogs.com%2Fseason-huang%2Fsome%20other%20thing"<br>
+    看到了区别吗，连 "/" 都被编码了，整个URL已经没法用了。
+    <br><br>
+    3、当你需要编码URL中的参数的时候，那么encodeURIComponent是最好方法。 <br>
+  </b>
+  <mark>将url作为另一个url的传参时</mark><br>
+  var param = "http://www.cnblogs.com/season-huang/"; //param为参数  <br>
+  param = encodeURIComponent(param);  <br>
+  var url = "http://www.cnblogs.com?next=" + param;  <br>
+  console.log(url) //"http://www.cnblogs.com?next=http%3A%2F%2Fwww.cnblogs.com%2Fseason-huang%2F"  <br>
+
+</p>
+
+<p>
+  decodeURI<br>
+  decodeURIComponent <br>
+  unescape <br>
+</p>
+</body>
+</html>

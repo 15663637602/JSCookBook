@@ -30,7 +30,9 @@
     enhance('toString是不可被枚举的');
     p(Object.propertyIsEnumerable('toString')); // false
     enhance('返回所有自有属性的名称');
+    enhance('Object.getOwnPropertyNames(obj);');
     p(Object.getOwnPropertyNames(obj));
+    p('Object.keys(obj);');
     p(Object.keys(obj));
 
 
